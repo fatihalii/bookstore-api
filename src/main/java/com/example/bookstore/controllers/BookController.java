@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bookstore")
+@RequestMapping("api/books")
 public class BookController {
 
     private BookService bookService;
@@ -17,35 +17,35 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("GetById")
-    public ResponseEntity<Book> getBookById(@RequestParam String id){
-        int bookId = Integer.parseInt(id);
-        Book book = bookService.getBookById(bookId).orElse(null);
-        return ResponseEntity.ok(book);
-    }
-
-    @GetMapping("GetAll")
+    @GetMapping
     public ResponseEntity<List<Book>> getAllBooks(){
         return ResponseEntity
                 .ok()
                 .body(bookService.getAllBooks());
     }
 
-    @GetMapping("GetByAuthor")
+    @GetMapping("{id}")
+    public ResponseEntity<Book> getBookById(@PathVariable String id){
+        int bookId = Integer.parseInt(id);
+        Book book = bookService.getBookById(bookId).orElse(null);
+        return ResponseEntity.ok(book);
+    }
+
+    @GetMapping("author")
     public ResponseEntity<Book> getBookByAuthor(@RequestParam String author){
         return ResponseEntity
                 .ok()
                 .body(bookService.getBookByAuthor(author));
     }
 
-    @GetMapping("GetByTitle")
+    @GetMapping("title")
     public ResponseEntity<Book> getBookByTitle(@RequestParam String title){
         return ResponseEntity
                 .ok()
                 .body(bookService.getBookByTitle(title));
     }
 
-    @PostMapping("Add")
+    @PostMapping
     public ResponseEntity<String> addBook(@RequestBody Book book){
         bookService.addBook(book);
         return ResponseEntity
@@ -53,16 +53,16 @@ public class BookController {
                 .body("Book created.");
     }
 
-    @PutMapping("Update")
-    public ResponseEntity<Book> updateBook(@RequestParam String id, @RequestBody Book book){
+    @PutMapping("{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable String id, @RequestBody Book book){
         Book res = bookService.updateBook(Integer.parseInt(id),book);
         return ResponseEntity
                 .ok()
                 .body(res);
     }
 
-    @DeleteMapping("Delete")
-    public ResponseEntity<String> deleteBook(@RequestParam String id){
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable String id){
         bookService.deleteBookById(Integer.parseInt(id));
         return ResponseEntity
                 .ok()
