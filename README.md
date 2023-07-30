@@ -8,12 +8,12 @@ The Bookstore API is a RESTful API that allows users to interact with a virtual 
 
 ## Table Of Contents
 
-- [Features](#Features)
-- [Technologies Used](#Technologies-Used)
-- [Installation](#Installation)
-- [Api Endpoints](#Api-Endpoints)
-- [Usage](#Usage)
-- [Contributing](#Contributing)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Api Endpoints](#api-endpoints)
+- [Usage](#usage)
+- [Contributing](#contributing)
 
 
 
